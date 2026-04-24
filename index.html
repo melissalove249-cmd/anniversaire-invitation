@@ -5,102 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Soirée 20 ANS | CHAPITRE VIOLET</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root { 
-            --v-dark: #1a0033; 
-            --v-bright: #9d50bb; 
-            --pink: #ff00cc; 
-            --silver: #e0e0e0;
-            --bg: #0a0015; 
-            --glass: rgba(20, 0, 40, 0.95); 
+            --v-dark: #1a0033; --v-bright: #9d50bb; --pink: #ff00cc; 
+            --silver: #e0e0e0; --bg: #0a0015; --glass: rgba(20, 0, 40, 0.95); 
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
         body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; }
         canvas { position: fixed; inset: 0; z-index: -1; }
-
-        .card-container { 
-            position: relative; 
-            width: min(92%, 400px); 
-            padding: 2px; 
-            border-radius: 30px; 
-            background: linear-gradient(135deg, var(--v-bright), var(--pink)); 
-            box-shadow: 0 0 30px rgba(157, 80, 187, 0.4);
-        }
-
-        .card { 
-            background: var(--glass); 
-            border-radius: 28px; 
-            padding: 25px; 
-            text-align: center; 
-            height: 570px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            backdrop-filter: blur(10px);
-        }
-
-        h1 { font-family: 'Playfair Display', serif; font-size: 1.7rem; margin-bottom: 8px; width: 100%; letter-spacing: 1px; color: var(--silver); }
+        .card-container { position: relative; width: min(92%, 400px); padding: 2px; border-radius: 30px; background: linear-gradient(135deg, var(--v-bright), var(--pink)); box-shadow: 0 0 30px rgba(157, 80, 187, 0.4); }
+        .card { background: var(--glass); border-radius: 28px; padding: 25px; text-align: center; height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 8px; width: 100%; letter-spacing: 1px; color: var(--silver); }
         .tag { color: var(--pink); font-size: 0.65rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-        p { font-size: 0.85rem; opacity: 0.85; margin-bottom: 15px; line-height: 1.5; color: #d1d1d1; }
-
-        .btn { 
-            background: linear-gradient(to right, #fff, var(--silver)); 
-            color: #1a0033; border: none; padding: 15px; border-radius: 15px; 
-            font-weight: 900; text-transform: uppercase; width: 100%; cursor: pointer; 
-            font-size: 0.8rem; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,0,204,0.3); 
-            transition: 0.3s;
-        }
-
-        .btn-opt { background: rgba(157, 80, 187, 0.1); color: white; border: 1px solid rgba(157, 80, 187, 0.3); margin-bottom: 8px; padding: 12px; transition: 0.3s; width: 100%; border-radius: 12px; }
-
+        p { font-size: 0.8rem; opacity: 0.85; margin-bottom: 15px; line-height: 1.4; color: #d1d1d1; }
+        .btn { background: linear-gradient(to right, #fff, var(--silver)); color: #1a0033; border: none; padding: 15px; border-radius: 15px; font-weight: 900; text-transform: uppercase; width: 100%; cursor: pointer; font-size: 0.8rem; margin-top: 10px; box-shadow: 0 4px 15px rgba(255,0,204,0.3); transition: 0.3s; }
+        .btn-opt { background: rgba(157, 80, 187, 0.1); color: white; border: 1px solid rgba(157, 80, 187, 0.3); margin-bottom: 8px; padding: 12px; transition: 0.3s; width: 100%; border-radius: 12px; font-size: 0.85rem; }
         input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--v-bright); background: rgba(0,0,0,0.5); color: white; text-align: center; margin-bottom: 10px; outline: none; }
-
-        .slot-box { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
-        .slot { width: 65px; height: 85px; background: #000; border: 2px solid var(--v-bright); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; box-shadow: inset 0 0 15px var(--v-dark); }
-        
-        #zone { height: 180px; width: 100%; position: relative; background: rgba(20, 0, 40, 0.6); border-radius: 20px; border: 1px solid rgba(157, 80, 187, 0.2); margin: 5px 0; overflow: hidden; }
+        .slot-box { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
+        .slot { width: 60px; height: 80px; background: #000; border: 2px solid var(--v-bright); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: inset 0 0 15px var(--v-dark); }
+        #zone { height: 160px; width: 100%; position: relative; background: rgba(20, 0, 40, 0.6); border-radius: 20px; border: 1px solid rgba(157, 80, 187, 0.2); margin: 5px 0; overflow: hidden; }
         .tgt { position: absolute; font-size: 32px; cursor: pointer; padding: 15px; transform: translate(-50%, -50%); z-index: 100; filter: drop-shadow(0 0 10px var(--pink)); }
-
-        .simon { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 150px; margin: 5px auto; }
-        .s-btn { height: 70px; border-radius: 12px; opacity: 0.2; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+        .simon { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 140px; margin: 5px auto; }
+        .s-btn { height: 60px; border-radius: 12px; opacity: 0.2; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
         .s-btn.active { opacity: 1; box-shadow: 0 0 20px var(--pink); border-color: white; }
-
-        #wheel { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--silver); background: conic-gradient(var(--v-dark) 0 25%, var(--v-bright) 25% 50%, var(--pink) 50% 75%, #4b0082 75% 100%); transition: transform 0.2s linear; }
-
-        @media print {
-            body { background: white !important; }
-            .card-container, canvas { display: none !important; }
-            .print-pass { display: block !important; border: 8px double #4b0082; padding: 50px; text-align: center; color: black !important; background: white !important; width: 100%; max-width: 600px; margin: 20px auto; }
-            .print-pass h1 { font-size: 30pt; color: #4b0082 !important; }
-        }
-        .print-pass { display: none; }
+        #wheel { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--silver); background: conic-gradient(var(--v-dark) 0 25%, var(--v-bright) 25% 50%, var(--pink) 50% 75%, #4b0082 75% 100%); transition: transform 0.2s linear; }
+        #finalPass { position: fixed; top: -5000px; left: 0; width: 400px; background: white; color: black; padding: 40px; text-align: center; border: 12px double #4b0082; }
     </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
-
-<div class="card-container">
-    <div id="app" class="card"></div>
-</div>
-
-<div id="pZone" class="print-pass"></div>
+<div class="card-container"><div id="app" class="card"></div></div>
+<div id="finalPass"></div>
 
 <script>
     let st = { s: 0, n: "", v: "", h: 0, q: 0, u: [], g: "", a: 0, sp: false };
     let wheelInterval;
     
     const rl = [
-        {e:'💎', l:'MEMBRE DIAMANT (VIP)'}, 
-        {e:'🔥', l:'LÉGENDE DE LA NUIT'}, 
-        {e:'👑', l:'SOUVERAIN DU GALA'}, 
-        {e:'🥂', l:'AMBASSADEUR PRIVILÈGE'},
-        {e:'✨', l:'ÉTOILE MONTANTE'},
-        {e:'🌪️', l:'TOURBILLON DE LA FÊTE'},
-        {e:'🦄', l:'INVITÉ MYTHIQUE'},
-        {e:'🕶️', l:'AGENT SECRET DU GALA'}
+        {e:'💎', l:'MEMBRE DIAMANT (VIP)'}, {e:'🔥', l:'LÉGENDE DE LA NUIT'}, {e:'👑', l:'SOUVERAIN DU GALA'}, 
+        {e:'🥂', l:'AMBASSADEUR PRIVILÈGE'}, {e:'✨', l:'ÉTOILE MONTANTE'}, {e:'🌪️', l:'TOURBILLON DE LA FÊTE'},
+        {e:'🦄', l:'INVITÉ MYTHIQUE'}, {e:'🕶️', l:'AGENT SECRET DU GALA'}
     ];
 
     const qz = [
@@ -111,46 +57,39 @@
         {q:"Quel est mon chanteur préféré ?", a:["Dadju","Tayc","Matt Pokora"], g:0}
     ];
 
-    const fails = [
-        "Aïe... On est amis ou on se connaît juste de vue ? 😂",
-        "Même mon chat connaît la réponse. Concentre-toi ! 🐱",
-        "Ouh là, la soirée n'a pas commencé que tu es déjà perdu ?",
-        "Faux ! Je vais finir par croire que tu t'es trompé de fête. 🙄",
-        "Grosse erreur. Heureusement que le ridicule ne tue pas !"
-    ];
+    const fails = ["Aïe... On se connaît vraiment ? 😂", "Même mon chat sait ça ! 🐱", "Ouh là, déjà perdu ? 🙄", "Faux ! Mauvaise soirée ? 🍷"];
 
     function getFail() { return fails[Math.floor(Math.random() * fails.length)]; }
 
     function draw() {
         const app = document.getElementById('app');
-        let h = `<div class="tag">Protocole ${st.s}/8</div>`;
+        let h = `<div class="tag">Etapes ${st.s}/8</div>`;
 
         if(st.s===0) {
-            h += `<h1>CHAPITRE 20</h1><p>Préparez-vous à l'événement de l'année. Votre accès doit être mérité.</p><button class="btn" onclick="go()">Lancer l'expérience</button>`;
+            h += `<h1>CHAPITRE 20</h1><p>Bienvenue dans l'expérience immersive de mon 20ème anniversaire. Ce n'est pas une simple invitation, c'est un laissez-passer que vous devez mériter. Seule l'élite franchira les portes du Gala Violet.</p><button class="btn" onclick="go()">Lancer l'expérience</button>`;
         } else if(st.s===1) {
-            h += `<h1>VOTRE NOM</h1><p>Sous quel nom souhaitez-vous marquer cette nuit ?</p><input type="text" id="ni" placeholder="Votre nom..."><button class="btn" onclick="save()">Continuer</button>`;
+            h += `<h1>VOTRE IDENTITÉ</h1><p>Avant d'entrer dans la légende, dites-nous qui vous êtes. Votre nom sera gravé sur votre pass officiel si vous réussissez les épreuves suivantes.</p><input type="text" id="ni" placeholder="Entrez votre nom..."><button class="btn" onclick="save()">Valider l'identité</button>`;
         } else if(st.s===2) {
-            h += `<h1>LE TEST</h1><p>Seuls les proches connaissent la vérité.</p><b>${qz[st.q].q}</b><div style="margin-top:10px">` + qz[st.q].a.map((o,i)=>`<button class="btn btn-opt" onclick="cq(${i})">${o}</button>`).join('') + `</div>`;
+            h += `<h1>LE TEST DE PROXIMITÉ</h1><p>Le cercle VIP est restreint. Prouvez que vous faites partie de mes proches en répondant correctement à ces questions personnelles. Une seule erreur et c'est le retour au début !</p><b style="display:block; margin-bottom:10px;">${qz[st.q].q}</b><div>` + qz[st.q].a.map((o,i)=>`<button class="btn btn-opt" onclick="cq(${i})">${o}</button>`).join('') + `</div>`;
         } else if(st.s===3) {
-            h += `<h1>DESTINÉE</h1><p>Déterminez votre statut exclusif.</p><div class="slot-box"><div class="slot" id="s1">?</div><div class="slot" id="s2">?</div><div class="slot" id="s3">?</div></div><h3 id="rlTxt" style="color:var(--pink); min-height:25px; margin-top:5px; font-weight:900;"></h3><button class="btn" id="sb" onclick="spin()">Tirer le levier</button>`;
+            h += `<h1>VOTRE DESTINÉE</h1><p>Dans ce Gala, chaque invité reçoit un rang honorifique. Lancez la machine du destin pour découvrir quel sera votre statut exclusif durant toute la soirée.</p><div class="slot-box"><div class="slot" id="s1">?</div><div class="slot" id="s2">?</div><div class="slot" id="s3">?</div></div><h3 id="rlTxt" style="color:var(--pink); min-height:25px; margin-top:5px; font-weight:900;"></h3><button class="btn" id="sb" onclick="spin()">Tirer le levier</button>`;
         } else if(st.s===4) {
-            h += `<h1>AGILITÉ</h1><p id="sc" style="color:var(--pink); font-weight:900">SCORE : ${st.h}/5</p><div id="zone"></div>`;
+            h += `<h1>ÉPREUVE d'AGILITÉ</h1><p>Les diamants du Gala sont rares. Faites preuve de rapidité et attrapez les 5 diamants qui apparaissent pour prouver votre vivacité avant de faire la fête.</p><p id="sc" style="color:var(--pink); font-weight:900">SCORE : ${st.h}/5</p><div id="zone"></div>`;
             setTimeout(spawn, 50);
         } else if(st.s===5) {
-            h += `<h1>SÉQUENCE</h1><p>Mémorisez le code d'accès.</p><div class="simon">
+            h += `<h1>CODE DE SÉCURITÉ</h1><p>L'accès à la Villa est protégé par un code visuel. Observez attentivement la séquence lumineuse et reproduisez-la parfaitement pour déverrouiller le dernier verrou.</p><div class="simon">
                 <div class="s-btn" id="b1" style="background:var(--v-bright)" onclick="hs(1)"></div>
                 <div class="s-btn" id="b2" style="background:var(--pink)" onclick="hs(2)"></div>
                 <div class="s-btn" id="b3" style="background:#4b0082" onclick="hs(3)"></div>
                 <div class="s-btn" id="b4" style="background:var(--silver)" onclick="hs(4)"></div>
-            </div><button class="btn" id="ss" onclick="ps()">Voir la séquence</button>`;
+            </div><button class="btn" id="ss" onclick="ps()">Afficher la séquence</button>`;
         } else if(st.s===6) {
-            h += `<h1>LE GAGE</h1><p>Tournez la roue pour valider votre venue.</p><div id="wheel"></div><p id="wg" style="color:var(--pink); font-weight:bold; height:20px; margin:5px 0;"></p><button class="btn" id="wb" onclick="tw()">Lancer la roue</button>`;
+            h += `<h1>LA ROUE DES GAGES</h1><p>La tradition veut que chaque invité relève un défi pour lancer l'ambiance. Tournez la roue pour découvrir la mission spéciale qui vous sera attribuée à votre arrivée.</p><div id="wheel"></div><p id="wg" style="color:var(--pink); font-weight:bold; height:20px; margin:5px 0;"></p><button class="btn" id="wb" onclick="tw()">Lancer la roue</button>`;
         } else if(st.s===7) {
-            h += `<h1>FINALISATION</h1><p>Dresscode <b>Violet & Argent</b> obligatoire. Prêt à rejoindre l'élite ?</p><button class="btn" onclick="go()">J'ACCEPTE</button>`;
+            h += `<h1>DERNIÈRES CONSIGNES</h1><p>Félicitations ! Le chapitre final approche. Pour une harmonie parfaite, le Dresscode <b>Violet & Argent</b> est à l'honneur. Sentez-vous libre dans vos choix, mais restez chic : les fashion faux-pas ne passeront pas inaperçus... Soyez mémorables, à très vite !</p><button class="btn" onclick="go()">J'ACCEPTE LES ÉTAPES</button>`;
         } else if(st.s===8) {
-            h += `<h1>VOTRE PASS ACCORDÉ</h1><div style="background:rgba(157, 80, 187, 0.1); padding:20px; border-radius:20px; width:100%; border: 1px solid var(--pink);">
-            <h2 style="margin-bottom:5px; font-family:'Playfair Display'; color:var(--silver);">${st.n}</h2><p style="color:var(--pink); font-weight:900;">${st.v}</p>
-            <p style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px; margin-top:10px; font-size:0.8rem; color:#eee"><b>VOTRE GAGE :</b> ${st.g}</p></div><button class="btn" onclick="prnt()">Imprimer mon invitation</button>`;
+            h += `<h1>ACCÈS ACCORDÉ</h1><p id="msgGen">Génération de votre invitation VIP...</p><div id="imgResult" style="width:100%; border-radius:15px; overflow:hidden; margin-top:10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></div><p style="font-size:0.7rem; margin-top:15px; color:var(--pink);">Maintenez votre doigt sur l'image pour l'enregistrer dans votre téléphone.</p>`;
+            setTimeout(generatePassImage, 500);
         }
         app.innerHTML = h;
     }
@@ -165,53 +104,33 @@
         let count = 0;
         const itv = setInterval(() => {
             const emojisRoll = ['💎','✨','💜','🥂','🔥','🌪️','🕶️','🦄'];
-            document.getElementById('s1').innerText = emojisRoll[Math.floor(Math.random()*emojisRoll.length)];
-            document.getElementById('s2').innerText = emojisRoll[Math.floor(Math.random()*emojisRoll.length)];
-            document.getElementById('s3').innerText = emojisRoll[Math.floor(Math.random()*emojisRoll.length)];
+            document.getElementById('s1').innerText = emojisRoll[Math.floor(Math.random()*8)];
+            document.getElementById('s2').innerText = emojisRoll[Math.floor(Math.random()*8)];
+            document.getElementById('s3').innerText = emojisRoll[Math.floor(Math.random()*8)];
             if(count++ > 18) {
                 clearInterval(itv);
-                document.getElementById('s1').innerText = target.e;
-                document.getElementById('s2').innerText = target.e;
-                document.getElementById('s3').innerText = target.e;
-                document.getElementById('rlTxt').innerText = target.l;
-                st.v = target.l;
-                setTimeout(go, 2000);
+                document.getElementById('s1').innerText = target.e; document.getElementById('s2').innerText = target.e; document.getElementById('s3').innerText = target.e;
+                document.getElementById('rlTxt').innerText = target.l; st.v = target.l; setTimeout(go, 2500);
             }
         }, 70);
     }
 
     function spawn() {
-        const z = document.getElementById('zone'); if(!z) return;
-        z.innerHTML = '';
-        const t = document.createElement('div');
-        t.className = 'tgt'; t.innerText = '💎';
+        const z = document.getElementById('zone'); if(!z) return; z.innerHTML = '';
+        const t = document.createElement('div'); t.className = 'tgt'; t.innerText = '💎';
         t.style.left = (Math.random()*70+15)+'%'; t.style.top = (Math.random()*70+15)+'%';
-        t.onclick = (e) => {
-            e.stopPropagation(); st.h++;
-            document.getElementById('sc').innerText = `SCORE : ${st.h}/5`;
-            if(st.h>=5) go(); else spawn();
-        };
+        t.onclick = (e) => { e.stopPropagation(); st.h++; document.getElementById('sc').innerText = `SCORE : ${st.h}/5`; if(st.h>=5) go(); else spawn(); };
         z.appendChild(t);
     }
 
     function ps() {
         const s = [1, 3, 2, 4]; document.getElementById('ss').style.visibility='hidden';
-        s.forEach((v, i) => {
-            setTimeout(() => {
-                const b = document.getElementById('b'+v);
-                if(b) { b.classList.add('active'); setTimeout(()=>b.classList.remove('active'), 400); }
-            }, i*700);
-        });
+        s.forEach((v, i) => { setTimeout(() => { const b = document.getElementById('b'+v); if(b) { b.classList.add('active'); setTimeout(()=>b.classList.remove('active'), 400); } }, i*700); });
     }
 
     function hs(id) {
-        st.u.push(id);
-        const b = document.getElementById('b'+id);
-        b.classList.add('active'); setTimeout(()=>b.classList.remove('active'), 200);
-        if(st.u.length === 4) {
-            if(st.u.join('')==="1324") go();
-            else { alert("Ouh là, Alzheimer précoce ? Retiens bien l'ordre ! 🧠"); st.u=[]; document.getElementById('ss').style.visibility='visible'; }
-        }
+        st.u.push(id); const b = document.getElementById('b'+id); b.classList.add('active'); setTimeout(()=>b.classList.remove('active'), 200);
+        if(st.u.length === 4) { if(st.u.join('')==="1324") go(); else { alert("Code incorrect !"); st.u=[]; document.getElementById('ss').style.visibility='visible'; } }
     }
 
     function tw() {
@@ -221,38 +140,45 @@
             wheelInterval = setInterval(() => { st.a += 25; document.getElementById('wheel').style.transform = `rotate(${st.a}deg)`; }, 20);
         } else {
             clearInterval(wheelInterval); st.sp = false;
-            const gages = ["Me faire un gros câlin", "Lancer le Karaoké", "Ouvrir la piste de danse", "Faire un discours de 20s","Me faire une déclaration","Faire une photo drôle avec tout le monde","Raconter ton pire dossier","Juger le meilleur danseur de la soirée",];
+            const gages = ["Me faire un gros câlin", "Lancer le Karaoké", "Ouvrir la piste de danse", "Faire un discours de 20s","Faire une déclaration","Raconter ton pire dossier"];
             st.g = gages[Math.floor(Math.random() * gages.length)];
-            document.getElementById('wg').innerText = "GAGE : " + st.g;
-            b.innerText = "CONTINUER";
-            b.onclick = go;
+            document.getElementById('wg').innerText = "VOTRE GAGE : " + st.g;
+            b.innerText = "CONTINUER"; b.onclick = go;
         }
     }
 
-    function prnt() {
-        document.getElementById('pZone').innerHTML = `
-            <p style="letter-spacing:10px; color:#4b0082">OFFICIEL</p>
-            <h1>GALA DES 20 ANS</h1>
-            <p>20 JUIN • 21H00 • VILLA SECRET</p>
-            <h2 style="text-transform:uppercase">${st.n}</h2>
-            <p style="font-size:22pt; font-weight:bold; color:#9d50bb">${st.v}</p>
-            <div style="border:4px double #4b0082; padding:25px; margin:30px 0;">
-                <b>VOTRE MISSION :</b><br>
-                <span style="font-size:18pt">${st.g}</span>
+    function generatePassImage() {
+        const p = document.getElementById('finalPass');
+        p.innerHTML = `
+            <p style="letter-spacing:10px; color:#4b0082; font-weight:900; margin-bottom:20px;">INVITATION OFFICIELLE</p>
+            <h1 style="color:black; font-size:30pt; margin-bottom:10px;">GALA DES 20 ANS</h1>
+            <p style="color:#333; font-size:14pt;">13 JUIN • 19H00</p>
+            <p style="color:#333; font-size:12pt; margin-top:5px;">Odratzheim (chez mon cavalier)</p>
+            <div style="margin:30px 0; border-top:2px solid #4b0082; border-bottom:2px solid #4b0082; padding:20px 0;">
+                <h2 style="text-transform:uppercase; font-size:22pt; margin-bottom:5px;">${st.n}</h2>
+                <p style="font-size:18pt; font-weight:bold; color:#9d50bb">${st.v}</p>
             </div>
-            <p>TENUE : VIOLET & ARGENT</p>`;
-        window.print();
+            <div style="background:#f4eeff; padding:20px; border-radius:15px; margin-bottom:25px; border:1px dashed #4b0082">
+                <b style="color:#4b0082">VOTRE MISSION DE SOIRÉE :</b><br>
+                <span style="font-size:16pt">${st.g}</span>
+            </div>
+            <p style="font-weight:bold; color:#4b0082">TENUE EXIGÉE : VIOLET & ARGENT</p>
+        `;
+        
+        html2canvas(p, { scale: 2 }).then(canvas => {
+            const img = new Image();
+            img.src = canvas.toDataURL("image/png");
+            img.style.width = "100%";
+            document.getElementById('imgResult').appendChild(img);
+            document.getElementById('msgGen').innerText = "Voici votre Pass Officiel !";
+        });
     }
 
     const cv = document.getElementById('stars'), cx = cv.getContext('2d');
     function rs() { cv.width = window.innerWidth; cv.height = window.innerHeight; }
     window.onresize = rs; rs();
     const dots = Array.from({length:80},()=>({x:Math.random()*innerWidth, y:Math.random()*innerHeight, o:Math.random()}));
-    function anim() {
-        cx.clearRect(0,0,cv.width,cv.height);
-        dots.forEach(p => { cx.globalAlpha = Math.abs(Math.sin(p.o+=0.01)); cx.beginPath(); cx.arc(p.x,p.y,1.5,0,Math.PI*2); cx.fillStyle="white"; cx.fill(); });
-        requestAnimationFrame(anim);
-    }
+    function anim() { cx.clearRect(0,0,cv.width,cv.height); dots.forEach(p => { cx.globalAlpha = Math.abs(Math.sin(p.o+=0.01)); cx.beginPath(); cx.arc(p.x,p.y,1.5,0,Math.PI*2); cx.fillStyle="white"; cx.fill(); }); requestAnimationFrame(anim); }
     anim(); draw();
 </script>
 </body>
