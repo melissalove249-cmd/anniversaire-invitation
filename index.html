@@ -90,6 +90,7 @@
 
 <script>
     let st = { s: 0, n: "", v: "", h: 0, q: 0, u: [], g: "", a: 0, sp: false };
+    let wheelInterval;
     
     const rl = [
         {e:'💎', l:'MEMBRE DIAMANT (VIP)'}, 
@@ -110,7 +111,6 @@
         {q:"Quel est mon chanteur préféré ?", a:["Dadju","Tayc","Matt Pokora"], g:0}
     ];
 
-    // MESSAGES DRÔLES POUR LES ERREURS
     const fails = [
         "Aïe... On est amis ou on se connaît juste de vue ? 😂",
         "Même mon chat connaît la réponse. Concentre-toi ! 🐱",
@@ -214,16 +214,15 @@
         }
     }
 
-    let wi;
     function tw() {
         const b = document.getElementById('wb');
         if(!st.sp) {
             st.sp = true; b.innerText = "ARRÊTER";
-            wi = setInterval(() => { st.a += 25; document.getElementById('wheel').style.transform = `rotate(${st.a}deg)`; }, 20);
+            wheelInterval = setInterval(() => { st.a += 25; document.getElementById('wheel').style.transform = `rotate(${st.a}deg)`; }, 20);
         } else {
-            clearInterval(wi); st.sp = false;
+            clearInterval(wheelInterval); st.sp = false;
             const gages = ["Me faire un gros câlin", "Lancer le Karaoké", "Ouvrir la piste de danse", "Faire un discours de 20s","Me faire une déclaration","Faire une photo drôle avec tout le monde","Raconter ton pire dossier","Juger le meilleur danseur de la soirée",];
-            st.g = gages[Math.floor(Math.random()*gages.length)];
+            st.g = gages[Math.floor(Math.random() * gages.length)];
             document.getElementById('wg').innerText = "GAGE : " + st.g;
             b.innerText = "CONTINUER";
             b.onclick = go;
