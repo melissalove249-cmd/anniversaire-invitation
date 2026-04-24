@@ -140,7 +140,7 @@
             wheelInterval = setInterval(() => { st.a += 25; document.getElementById('wheel').style.transform = `rotate(${st.a}deg)`; }, 20);
         } else {
             clearInterval(wheelInterval); st.sp = false;
-            const gages = ["Me faire un gros câlin", "Lancer le Karaoké", "Ouvrir la piste de danse", "Faire un discours de 20s","Faire une déclaration","Raconter ton pire dossier"];
+            const gages = ["Me faire un gros câlin", "Lancer le Karaoké", "Ouvrir la piste de danse", "Faire un discours de 30s","Faire une déclaration","Raconter ton pire dossier"];
             st.g = gages[Math.floor(Math.random() * gages.length)];
             document.getElementById('wg').innerText = "VOTRE GAGE : " + st.g;
             b.innerText = "CONTINUER"; b.onclick = go;
